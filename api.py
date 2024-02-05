@@ -41,11 +41,13 @@ async def analyze_number(user_input: str):
     return analyze_input(user_input)
 
 def hora_exata(hora_certa: int) -> str:
-    if hora_certa <= 12:
-        return "Bom dia"
-    elif hora_certa <= 18:
+    if hora_certa < 6:
         return "Boa noite"
-    elif hora_certa <= 6:
+    elif hora_certa < 12:
+        return "Bom dia"
+    elif hora_certa < 18:
+        return "Boa tarde"
+    else:
         return "Boa noite"
 
 @app.get("/hour/")
