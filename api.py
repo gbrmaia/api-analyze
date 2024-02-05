@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from typing import Dict
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import unidecode
 
 import numpy as np
@@ -41,6 +41,9 @@ async def analyze_number(user_input: str):
     return analyze_input(user_input)
 
 def hora_exata(hora_certa: int) -> str:
+    local_timezone = timezone(timedelta(hours=-3))  # Substitua isso pelo fuso horário desejado
+    datahora = datetime.now(local_timezone)
+    hora_certa = datahora.hour
     if hora_certa < 6:
         return "Boa noite"
     elif hora_certa < 12:
