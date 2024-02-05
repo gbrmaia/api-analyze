@@ -14,7 +14,7 @@ array2 = np.array(['2', 'opcao 2', 'opcao dois', 'dois'])
 array3 = np.array(['3', 'opcao 3', 'opcao tres', 'tres'])
 
 def preprocess_input(user_input: str) -> str:
-    return unidecode.unidecode(user_input.lower())
+    return unidecode.unidecode(user_input).lower()
 
 # Função para analisar o input do usuário
 def analyze_input(user_input: str) -> Dict[str, str]:
