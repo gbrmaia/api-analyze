@@ -10,7 +10,7 @@ app = FastAPI()
 # Função para carregar os arrays a partir do arquivo de texto
 def carregar_arrays() -> Dict[str, np.ndarray]:
     arrays = {}
-    array_names = ['array1', 'array2', 'array3', 'array4']
+    array_names = ['array1', 'array2', 'array3', 'array4', 'arraynaodeterminado']
 
     for array_name in array_names:
         try:
