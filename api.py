@@ -33,7 +33,8 @@ def salvar_arrays(arrays: Dict[str, np.ndarray]):
 arrays = carregar_arrays()
 
 def formatar_input(user_input: str) -> str:
-    return unidecode.unidecode(user_input).lower()
+    input_formatado = unidecode.unidecode(user_input).lower()
+    return input_formatado
 
 # Função para analisar o input do usuário
 def analyze_input(user_input: str) -> Dict[str, str]:
@@ -104,3 +105,25 @@ def analyze_hora():
     hora_certa = datahora.hour
     message = hora_exata(hora_certa)
     return {"messagehora": message}
+
+def analyze_input_partial(user_input: str) -> Dict[str, str]:
+    result = {}
+
+    input_formatado = formatar_input(user_input)
+
+    found_values = []
+    for array_name, array_values in arrays.items():
+        keywords_array = [formatar_input(value.replace(" ", "")) for value in array_values]
+        if any(keyword in input_formatado for keyword in keywords_array):
+            found_values.append(array_name)
+            result["keywordfound"] = f"{array_name}"
+
+    if not found_values:
+        result["keywordnotfound"] = "Nenhuma palavra-chave encontrada nos arrays."
+    return result
+
+# Endpoint para análise do input do usuário com correspondência parcial
+@app.get("/analyze_keyword/")
+async def analyze_partial_number(user_input: str):
+    return analyze_input_partial(user_input)
+
