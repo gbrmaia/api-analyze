@@ -3,6 +3,7 @@ from typing import Dict
 from datetime import datetime, timezone, timedelta
 import unidecode
 import numpy as np
+import asyncio
 
 # Criação da aplicação FastAPI
 app = FastAPI()
@@ -126,4 +127,13 @@ def analyze_input_partial(user_input: str) -> Dict[str, str]:
 @app.get("/analyze_keyword/")
 async def analyze_partial_number(user_input: str):
     return analyze_input_partial(user_input)
+
+async def temporizador_10_segundos():
+    await asyncio.sleep(10)
+    return {"mensagem": "Temporizador concluído após 10 segundos"}
+
+@app.get("/api/endpoint_com_atraso")
+async def endpoint_com_atraso():
+    resultado_temporizador = await temporizador_10_segundos()
+    return resultado_temporizador
 
