@@ -3,7 +3,6 @@ from typing import Dict
 from datetime import datetime, timezone, timedelta
 import unidecode
 import numpy as np
-import asyncio
 
 # Criação da aplicação FastAPI
 app = FastAPI()
@@ -123,14 +122,6 @@ def analyze_input_partial(user_input: str) -> Dict[str, str]:
         result["keywordnotfound"] = "Nenhuma palavra-chave encontrada nos arrays."
     return result
 
-# Endpoint para análise do input do usuário com correspondência parcial
-@app.get("/analyze_keyword/")
-async def analyze_partial_number(user_input: str):
-    return analyze_input_partial(user_input)
-
-async def temporizador_10_segundos():
-    await asyncio.sleep(10)
-    return {"mensagem": "Temporizador concluído após 10 segundos"}
 
 @app.get("/api/endpoint_com_atraso")
 async def endpoint_com_atraso():
