@@ -149,15 +149,14 @@ async def start_timer_endpoint():
         asyncio.create_task(start_timer())
         return "Temporizador iniciado por 30 minutos."
         
-@app.get("/tempo_finalizado/")
-async def tempo_finalizado():
-    global timer_running
-    if timer_running:
-        return "O temporizador ainda está em execução."
-    else:
-        return "Tempo finalizado!"
-        asyncio.create_task(start_timer())
-        return "Temporizador iniciado por 30 minutos."
+async def wait_and_return():
+    await asyncio.sleep(3600)  # Espera 1 minuto
+    return "Passaram-se 1 hora!"
+
+@app.get("/iniciar_timer/")
+async def run_task():
+    result = await wait_and_return()
+    return {"message": result}
 
 
 
