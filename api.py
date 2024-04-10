@@ -121,33 +121,6 @@ def analyze_input_partial(user_input: str) -> Dict[str, str]:
     if not found_values:
         result["keywordnotfound"] = "Nenhuma palavra-chave encontrada nos arrays."
     return result
-
-
-@app.get("/api/endpoint_com_atraso")
-async def endpoint_com_atraso():
-    resultado_temporizador = await temporizador_10_segundos()
-    return resultado_temporizador
-
-# Variável global para verificar se o temporizador está em execução
-timer_running = False
-
-# Função para iniciar o temporizador
-async def start_timer():
-    global timer_running
-    timer_running = True
-    await asyncio.sleep(1800)  # 30 minutos de espera
-    timer_running = False
-    return "Tempo finalizado!"
-
-# Endpoint para iniciar o temporizador
-@app.get("/iniciar_timer/")
-async def start_timer_endpoint():
-    global timer_running
-    if timer_running:
-        return "O temporizador já está em execução."
-    else:
-        asyncio.create_task(start_timer())
-        return "Temporizador iniciado por 30 minutos."
         
 async def wait_and_return():
     await asyncio.sleep(3600)  # Espera 1 minuto
