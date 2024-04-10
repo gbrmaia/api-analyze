@@ -123,7 +123,7 @@ def analyze_input_partial(user_input: str) -> Dict[str, str]:
     return result
         
 async def wait_and_return():
-    await asyncio.sleep(10)  # Espera 1 minuto
+    await asyncio.sleep(30)  # Espera 1 minuto
     return "Passaram-se 1 hora!"
 
 @app.get("/iniciar_timer/")
