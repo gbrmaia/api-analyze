@@ -3,7 +3,7 @@ from typing import Dict
 from datetime import datetime, timezone, timedelta
 import unidecode
 import numpy as np
-
+import asyncio
 # Criação da aplicação FastAPI
 app = FastAPI()
 
