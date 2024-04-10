@@ -146,6 +146,14 @@ async def start_timer_endpoint():
     if timer_running:
         return "O temporizador já está em execução."
     else:
+
+@app.get("/tempo_finalizado/")
+async def tempo_finalizado():
+    global timer_running
+    if timer_running:
+        return "O temporizador ainda está em execução."
+    else:
+        return "Tempo finalizado!"
         asyncio.create_task(start_timer())
         return "Temporizador iniciado por 30 minutos."
 
